@@ -16,7 +16,7 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Entry.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Entry.php 24645 2012-02-25 21:47:06Z adamlundrigan $
  */
 
 /**
@@ -214,7 +214,7 @@ class Zend_Feed_Writer_Entry
         $zdate = null;
         if ($date === null) {
             $zdate = new Zend_Date;
-        } elseif (ctype_digit($date) && strlen($date) == 10) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
         } elseif ($date instanceof Zend_Date) {
             $zdate = $date;
@@ -235,7 +235,7 @@ class Zend_Feed_Writer_Entry
         $zdate = null;
         if ($date === null) {
             $zdate = new Zend_Date;
-        } elseif (ctype_digit($date) && strlen($date) == 10) {
+        } elseif (ctype_digit((string)$date)) {
             $zdate = new Zend_Date($date, Zend_Date::TIMESTAMP);
         } elseif ($date instanceof Zend_Date) {
             $zdate = $date;
