@@ -16,7 +16,7 @@
  * @package    Zend_Validate
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: EmailAddress.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: EmailAddress.php 24660 2012-02-26 07:30:35Z adamlundrigan $
  */
 
 /**
@@ -177,6 +177,8 @@ class Zend_Validate_EmailAddress extends Zend_Validate_Abstract
             } else {
                 $this->setHostnameValidator($options['hostname']);
             }
+        } elseif ($this->_options['hostname'] == null) {
+            $this->setHostnameValidator();
         }
 
         if (array_key_exists('mx', $options)) {
