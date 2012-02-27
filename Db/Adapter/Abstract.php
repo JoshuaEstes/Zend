@@ -17,7 +17,7 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Abstract.php 24666 2012-02-27 02:17:19Z adamlundrigan $
  */
 
 
@@ -745,7 +745,7 @@ abstract class Zend_Db_Adapter_Abstract
      * @param string|Zend_Db_Select $sql An SQL SELECT statement.
      * @param mixed $bind Data to bind into SELECT placeholders.
      * @param mixed                 $fetchMode Override current fetch mode.
-     * @return array
+     * @return mixed Array, object, or scalar depending on fetch mode.
      */
     public function fetchRow($sql, $bind = array(), $fetchMode = null)
     {
