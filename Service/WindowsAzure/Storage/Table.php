@@ -17,7 +17,7 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Table.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Table.php 24697 2012-03-23 13:11:04Z ezimuel $
  */
 
 /**
@@ -39,6 +39,11 @@ require_once 'Zend/Service/WindowsAzure/Storage/TableEntityQuery.php';
  * @see Zend_Service_WindowsAzure_Storage_DynamicTableEntity
  */
 require_once 'Zend/Service/WindowsAzure/Storage/DynamicTableEntity.php';
+
+/**
+ * @see Zend_Service_WindowsAzure_Credentials_SharedKeyLite 
+ */
+require_once 'Zend/Service/WindowsAzure/Credentials/SharedKeyLite.php';
 
 /**
  * @category   Zend

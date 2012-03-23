@@ -17,7 +17,7 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Storage.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Storage.php 24697 2012-03-23 13:11:04Z ezimuel $
  */
 
 /**
@@ -25,6 +25,15 @@
  */
 require_once 'Zend/Http/Client.php';
 
+/**
+ * @see Zend_Service_WindowsAzure_Credentials_SharedKey
+ */
+require_once 'Zend/Service/WindowsAzure/Credentials/SharedKey.php';
+
+/**
+ * @see Zend_Service_WindowsAzure_RetryPolicy_RetryPolicyAbstract
+ */
+require_once 'Zend/Service/WindowsAzure/RetryPolicy/RetryPolicyAbstract.php';
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure

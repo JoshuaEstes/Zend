@@ -17,7 +17,7 @@
  * @subpackage Storage
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://todo     name_todo
- * @version    $Id: Blob.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Blob.php 24697 2012-03-23 13:11:04Z ezimuel $
  */
 
 /**
@@ -50,7 +50,10 @@ require_once 'Zend/Service/WindowsAzure/Storage/LeaseInstance.php';
  */
 require_once 'Zend/Service/WindowsAzure/Storage/Blob/Stream.php';
 
-
+/**
+ * @see Zend_Service_WindowsAzure_Credentials_SharedAccessSignature
+ */
+require_once 'Zend/Service/WindowsAzure/Credentials/SharedAccessSignature.php';
 /**
  * @category   Zend
  * @package    Zend_Service_WindowsAzure
