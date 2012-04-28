@@ -16,7 +16,7 @@
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: File.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: File.php 24726 2012-04-28 14:14:25Z rob $
  */
 
 /**
@@ -86,8 +86,17 @@ class Zend_Reflection_File implements Reflector
     public function __construct($file)
     {
         $fileName = $file;
-
-        if (($fileRealpath = realpath($fileName)) === false) {
+        
+        $fileRealpath = realpath($fileName);
+        if ($fileRealpath) {
+            // realpath() doesn't return false if Suhosin is included
+            // see http://uk3.php.net/manual/en/function.realpath.php#82770
+            if (!file_exists($fileRealpath)) {
+                $fileRealpath = false;
+            }
+        }
+        
+        if ($fileRealpath === false) {
             $fileRealpath = self::findRealpathInIncludePath($file);
         }
 
