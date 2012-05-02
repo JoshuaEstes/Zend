@@ -33,7 +33,7 @@ require_once 'Zend/Server/Interface.php';
  * @uses       Zend_Server_Interface
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Server.php 24718 2012-04-26 17:05:28Z ezimuel $
+ * @version    $Id: Server.php 24744 2012-05-02 11:36:26Z ezimuel $
  */
 class Zend_Soap_Server implements Zend_Server_Interface
 {
@@ -271,7 +271,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
         }
 
         if (null !== $this->_wsiCompliant) {
-            $options['ws_i'] = $this->_wsiCompliant;
+            $options['wsi_compliant'] = $this->_wsiCompliant;
         }
         
         return $options;
@@ -863,7 +863,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
         } catch (Zend_Soap_Server_Exception $e) {
             $setRequestException = $e;
         }
-
+        
         $soap = $this->_getSoap();
 
         ob_start();
