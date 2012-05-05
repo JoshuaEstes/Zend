@@ -17,7 +17,7 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: FormReset.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: FormReset.php 24750 2012-05-05 01:24:21Z adamlundrigan $
  */
 
 
@@ -64,12 +64,6 @@ class Zend_View_Helper_FormReset extends Zend_View_Helper_FormElement
             $disabled = ' disabled="disabled"';
         }
 
-        // get closing tag
-        $endTag = '>';
-        if ($this->view->doctype()->isXhtml()) {
-            $endTag = ' />';
-        }
-
         // Render button
         $xhtml = '<input type="reset"'
                . ' name="' . $this->view->escape($name) . '"'
@@ -82,7 +76,7 @@ class Zend_View_Helper_FormReset extends Zend_View_Helper_FormElement
         }
 
         // add attributes, close, and return
-        $xhtml .= $this->_htmlAttribs($attribs) . $endTag;
+        $xhtml .= $this->_htmlAttribs($attribs) . $this->getClosingBracket();
         return $xhtml;
     }
 }
