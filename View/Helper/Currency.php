@@ -17,7 +17,7 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Currency.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Currency.php 24768 2012-05-06 03:08:09Z adamlundrigan $
  */
 
 /** Zend_View_Helper_Abstract.php */
@@ -61,8 +61,9 @@ class Zend_View_Helper_Currency extends Zend_View_Helper_Abstract
     /**
      * Output a formatted currency
      *
-     * @param  integer|float                    $value    Currency value to output
-     * @param  string|Zend_Locale|Zend_Currency $currency OPTIONAL Currency to use for this call
+     * @param  integer|float            $value    Currency value to output
+     * @param  string|Zend_Locale|array $currency OPTIONAL Currency to use for
+     *                                            this call
      * @return string Formatted currency
      */
     public function currency($value = null, $currency = null)
