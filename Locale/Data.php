@@ -17,7 +17,7 @@
  * @subpackage Data
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Data.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Data.php 24766 2012-05-06 02:51:42Z adamlundrigan $
  */
 
 /**
@@ -361,7 +361,7 @@ class Zend_Locale_Data
                 break;
 
             case 'type':
-                if (empty($type)) {
+                if (empty($value)) {
                     $temp = self::_getFile($locale, '/ldml/localeDisplayNames/types/type', 'type');
                 } else {
                     if (($value == 'calendar') or
