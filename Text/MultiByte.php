@@ -16,7 +16,7 @@
  * @package   Zend_Text
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: MultiByte.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version   $Id: MultiByte.php 24762 2012-05-06 00:06:46Z adamlundrigan $
  */
 
 /**
@@ -107,7 +107,7 @@ class Zend_Text_MultiByte
         $lengthOfPadding = $padLength - iconv_strlen($input, $charset);
         $padStringLength = iconv_strlen($padString, $charset);
 
-        if ($padStringLength === 0 || $lengthOfPadding === 0) {
+        if ($padStringLength === 0 || $lengthOfPadding <= 0) {
             $return = $input;
         } else {
             $repeatCount = floor($lengthOfPadding / $padStringLength);
