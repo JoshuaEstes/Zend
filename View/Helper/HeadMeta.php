@@ -16,7 +16,7 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: HeadMeta.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: HeadMeta.php 24776 2012-05-08 18:36:40Z adamlundrigan $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -202,14 +202,15 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
             return false;
         }
 
+        $isHtml5 = is_null($this->view) ? false : $this->view->doctype()->isHtml5();
+
         if (!isset($item->content)
-        && (! $this->view->doctype()->isHtml5()
-        || (! $this->view->doctype()->isHtml5() && $item->type !== 'charset'))) {
+        && (! $isHtml5 || (! $isHtml5 && $item->type !== 'charset'))) {
             return false;
         }
 
         // <meta property= ... /> is only supported with doctype RDFa
-        if (!$this->view->doctype()->isRdfa()
+        if ( !is_null($this->view) && !$this->view->doctype()->isRdfa()
             && $item->type === 'property') {
             return false;
         }
@@ -341,7 +342,7 @@ class Zend_View_Helper_HeadMeta extends Zend_View_Helper_Placeholder_Container_S
 
         $modifiersString = '';
         foreach ($item->modifiers as $key => $value) {
-            if ($this->view->doctype()->isHtml5()
+            if (!is_null($this->view) && $this->view->doctype()->isHtml5()
             && $key == 'scheme') {
                 require_once 'Zend/View/Exception.php';
                 throw new Zend_View_Exception('Invalid modifier '
