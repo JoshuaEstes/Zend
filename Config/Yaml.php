@@ -16,7 +16,7 @@
  * @package   Zend_Config
  * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Yaml.php 24712 2012-04-16 20:13:51Z bittarman $
+ * @version   $Id: Yaml.php 24786 2012-05-09 15:59:00Z adamlundrigan $
  */
 
 /**
@@ -310,7 +310,7 @@ class Zend_Config_Yaml extends Zend_Config
                 $inIndent      = true;
             }
 
-            if (preg_match("/(\w+):\s*(.*)/", $line, $m)) {
+            if (preg_match("/(?!-)([\w\-]+):\s*(.*)/", $line, $m)) {
                 // key: value
                 if (strlen($m[2])) {
                     // simple key: value
