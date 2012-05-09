@@ -17,7 +17,7 @@
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Session.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Session.php 24787 2012-05-09 17:53:55Z rob $
  * @since      Preview Release 0.2
  */
 
@@ -383,9 +383,9 @@ class Zend_Session extends Zend_Session_Abstract
      */
     public static function sessionExists()
     {
-        if (ini_get('session.use_cookies') == '1' && isset($_COOKIE[session_name()])) {
+        if ((bool)ini_get('session.use_cookies') == true && isset($_COOKIE[session_name()])) {
             return true;
-        } elseif (!empty($_REQUEST[session_name()])) {
+        } elseif ((bool)ini_get('session.use_only_cookies') == false && isset($_REQUEST[session_name()])) {
             return true;
         } elseif (self::$_unitTestEnabled) {
             return true;
