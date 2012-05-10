@@ -17,7 +17,7 @@
  * @subpackage Statement
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Statement.php 24788 2012-05-09 21:23:44Z mcleod@spaceweb.nl $
+ * @version    $Id: Statement.php 24790 2012-05-10 12:28:51Z mcleod@spaceweb.nl $
  */
 
 /**
@@ -186,9 +186,12 @@ abstract class Zend_Db_Statement implements Zend_Db_Statement_Interface
         $qe = $this->_adapter->quote($q);
         $qe = substr($qe, 1, 2);
         $qe = preg_quote($qe);
+        $escapeChar = substr($qe,0,1);
         // remove 'foo\'bar'
         if (!empty($q)) {
-            $sql = preg_replace("/$q($qe|[^$q])*$q/Us", '', $sql);
+            $escapeChar = preg_quote($escapeChar);
+            // this segfaults only after 65,000 characters instead of 9,000
+            $sql = preg_replace("/$q([^$q{$escapeChar}]*|($qe)*)*$q/s", '', $sql);
         }
         
         // get a version of the SQL statement with all quoted
