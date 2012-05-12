@@ -16,7 +16,7 @@
  * @package    Zend_Dom
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Query.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Query.php 24794 2012-05-12 00:20:01Z adamlundrigan $
  */
 
 /**
@@ -124,6 +124,10 @@ class Zend_Dom_Query
         }
         // breaking XML declaration to make syntax highlighting work
         if ('<' . '?xml' == substr(trim($document), 0, 5)) {
+            if (preg_match('/\?'.'>\s+<html[^>]*xmlns="([^"]+)"[^>]*>/i', $document, $matches)) {
+                $this->_xpathNamespaces[] = $matches[1];
+                return $this->setDocumentXhtml($document, $encoding);
+            }
             return $this->setDocumentXml($document, $encoding);
         }
         if (strstr($document, 'DTD XHTML')) {
