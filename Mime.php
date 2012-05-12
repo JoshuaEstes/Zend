@@ -16,7 +16,7 @@
  * @package    Zend_Mime
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Mime.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Mime.php 24797 2012-05-12 19:12:58Z adamlundrigan $
  */
 
 
@@ -130,7 +130,7 @@ class Zend_Mime
         $str = self::_encodeQuotedPrintable($str);
 
         // Split encoded text into separate lines
-        while ($str) {
+        while(strlen($str) > 0) {
             $ptr = strlen($str);
             if ($ptr > $lineLength) {
                 $ptr = $lineLength;
