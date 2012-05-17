@@ -17,7 +17,7 @@
  * @subpackage Rsa
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Rsa.php 24707 2012-04-03 19:16:11Z rob $
+ * @version    $Id: Rsa.php 24808 2012-05-17 19:56:09Z rob $
  */
 
 /**
@@ -71,7 +71,7 @@ class Zend_Crypt_Rsa
     {
         if (!extension_loaded('openssl')) {
             require_once 'Zend/Crypt/Rsa/Exception.php';
-            throw new Zend_Crypt_Rsa_Exception('Zend_Crypt_Rsa requires openssl extention to be loaded.');
+            throw new Zend_Crypt_Rsa_Exception('Zend_Crypt_Rsa requires openssl extension to be loaded.');
         }
 
         // Set _hashAlgorithm property when we are sure, that openssl extension is loaded
