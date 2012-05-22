@@ -16,7 +16,7 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: HeadLink.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: HeadLink.php 24814 2012-05-22 16:55:35Z adamlundrigan $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -379,7 +379,7 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
         }
 
         $attributes = compact('rel', 'type', 'href', 'media', 'conditionalStylesheet', 'extras');
-        return $this->createData($attributes);
+        return $this->createData($this->_applyExtras($attributes));
     }
 
     /**
@@ -432,6 +432,24 @@ class Zend_View_Helper_HeadLink extends Zend_View_Helper_Placeholder_Container_S
         $title = (string) $title;
 
         $attributes = compact('rel', 'href', 'type', 'title', 'extras');
-        return $this->createData($attributes);
+        return $this->createData($this->_applyExtras($attributes));
+    }
+
+    /**
+     * Apply any overrides specified in the 'extras' array
+     * @param array $attributes
+     * @return array
+     */
+    protected function _applyExtras($attributes)
+    {
+        if (isset($attributes['extras'])) {
+            foreach ($attributes['extras'] as $eKey=>$eVal) {
+                if (isset($attributes[$eKey])) {
+                    $attributes[$eKey] = $eVal;
+                    unset($attributes['extras'][$eKey]);
+                }
+            }
+        }
+        return $attributes;
     }
 }
