@@ -17,7 +17,7 @@
  * @subpackage Element
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Captcha.php 24773 2012-05-07 22:07:47Z adamlundrigan $
+ * @version    $Id: Captcha.php 24824 2012-05-29 20:27:05Z rob $
  */
 
 /** @see Zend_Form_Element_Xhtml */
@@ -124,24 +124,6 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
              ->setRequired(true)
              ->setAutoInsertNotEmptyValidator(false)
              ->addValidator($this->getCaptcha(), true);
-    }
-
-    /**
-     * Return all attributes
-     *
-     * @return array
-     */
-    public function getAttribs()
-    {
-        $attribs = get_object_vars($this);
-        unset($attribs['helper']);
-        foreach ($attribs as $key => $value) {
-            if ('_' == substr($key, 0, 1)) {
-                unset($attribs[$key]);
-            }
-        }
-
-        return $attribs;
     }
 
     /**

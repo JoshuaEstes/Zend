@@ -38,7 +38,7 @@ require_once 'Zend/Validate/Abstract.php';
  * @subpackage Element
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Element.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Element.php 24824 2012-05-29 20:27:05Z rob $
  */
 class Zend_Form_Element implements Zend_Validate_Interface
 {
@@ -904,6 +904,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
     public function getAttribs()
     {
         $attribs = get_object_vars($this);
+        unset($attribs['helper']);
         foreach ($attribs as $key => $value) {
             if ('_' == substr($key, 0, 1)) {
                 unset($attribs[$key]);
