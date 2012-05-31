@@ -17,7 +17,7 @@
  * @subpackage PluginLoader
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: PluginLoader.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: PluginLoader.php 24848 2012-05-31 19:28:48Z rob $
  */
 
 /** Zend_Loader_PluginLoader_Interface */
@@ -127,12 +127,8 @@ class Zend_Loader_PluginLoader implements Zend_Loader_PluginLoader_Interface
             return $prefix;
         }
 
-        $last = strlen($prefix) - 1;
-        if ($prefix{$last} == '\\') {
-            return $prefix;
-        }
-
-        return rtrim($prefix, '_') . '_';
+        $nsSeparator = (false !== strpos($prefix, '\\'))?'\\':'_';
+        return rtrim($prefix, $nsSeparator) . $nsSeparator;
     }
 
     /**

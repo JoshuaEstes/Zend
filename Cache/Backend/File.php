@@ -17,7 +17,7 @@
  * @subpackage Zend_Cache_Backend
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: File.php 24677 2012-03-12 21:27:13Z mabe $
+ * @version    $Id: File.php 24844 2012-05-31 19:01:36Z rob $
  */
 
 /**
@@ -175,10 +175,10 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
     public function setCacheDir($value, $trailingSeparator = true)
     {
         if (!is_dir($value)) {
-            Zend_Cache::throwException('cache_dir must be a directory');
+            Zend_Cache::throwException(sprintf('cache_dir "%s" must be a directory', $value));
         }
         if (!is_writable($value)) {
-            Zend_Cache::throwException('cache_dir is not writable');
+            Zend_Cache::throwException(sprintf('cache_dir "%s" is not writable', $value));
         }
         if ($trailingSeparator) {
             // add a trailing DIRECTORY_SEPARATOR if necessary

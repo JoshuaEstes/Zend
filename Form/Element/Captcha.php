@@ -17,7 +17,7 @@
  * @subpackage Element
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Captcha.php 24824 2012-05-29 20:27:05Z rob $
+ * @version    $Id: Captcha.php 24848 2012-05-31 19:28:48Z rob $
  */
 
 /** @see Zend_Form_Element_Xhtml */
@@ -232,7 +232,8 @@ class Zend_Form_Element_Captcha extends Zend_Form_Element_Xhtml
         switch ($type) {
             case null:
                 $loader = $this->getPluginLoader(self::CAPTCHA);
-                $cPrefix = rtrim($prefix, '_') . '_Captcha';
+                $nsSeparator = (false !== strpos($prefix, '\\'))?'\\':'_';
+                $cPrefix = rtrim($prefix, $nsSeparator) . $nsSeparator . 'Captcha';
                 $cPath   = rtrim($path, '/\\') . '/Captcha';
                 $loader->addPrefixPath($cPrefix, $cPath);
                 return parent::addPrefixPath($prefix, $path);
