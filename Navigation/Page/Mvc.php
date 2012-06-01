@@ -17,7 +17,7 @@
  * @subpackage Page
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Mvc.php 24850 2012-05-31 19:33:41Z rob $
+ * @version    $Id: Mvc.php 24857 2012-06-01 01:20:48Z adamlundrigan $
  */
 
 /**
@@ -94,7 +94,6 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      */
     protected $_resetParams = true;
 
-        
     /**
      * Whether href should be encoded when assembling URL
      *
@@ -102,6 +101,13 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      * @var bool 
      */
     protected $_encodeUrl = true;
+
+    /**
+     * Whether this page should be considered active
+     *
+     * @var bool
+     */
+    protected $_active = null;
 
     /**
      * Cached href
@@ -137,7 +143,7 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
      */
     public function isActive($recursive = false)
     {
-        if (!$this->_active) {
+        if (null === $this->_active) {
             $front     = Zend_Controller_Front::getInstance();
             $request   = $front->getRequest();
             $reqParams = array();
@@ -186,6 +192,8 @@ class Zend_Navigation_Page_Mvc extends Zend_Navigation_Page
                 $this->_active = true;
                 return true;
             }
+            
+            $this->_active = false;
         }
 
         return parent::isActive($recursive);
