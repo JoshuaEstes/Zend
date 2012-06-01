@@ -16,7 +16,7 @@
  * @package    Zend_Reflection
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Method.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: Method.php 24860 2012-06-01 17:27:47Z adamlundrigan $
  */
 
 /**
@@ -163,6 +163,6 @@ class Zend_Reflection_Method extends ReflectionMethod
         }
 
         // just in case we had code on the bracket lines
-        return rtrim(ltrim(implode("\n", $lines), '{'), '}');
+        return implode("\n", $lines);
     }
 }
