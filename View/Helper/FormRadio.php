@@ -17,7 +17,7 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: FormRadio.php 24840 2012-05-31 14:15:01Z adamlundrigan $
+ * @version    $Id: FormRadio.php 24865 2012-06-02 01:02:32Z adamlundrigan $
  */
 
 
@@ -172,6 +172,11 @@ class Zend_View_Helper_FormRadio extends Zend_View_Helper_FormElement
 
             // add to the array of radio buttons
             $list[] = $radio;
+        }
+        
+        // XHTML or HTML for standard list separator?
+        if (!$this->_isXhtml() && false !== strpos($listsep, '<br />')) {
+            $listsep = str_replace('<br />', '<br>', $listsep);
         }
 
         // done!
