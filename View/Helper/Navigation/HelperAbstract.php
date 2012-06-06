@@ -17,7 +17,7 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: HelperAbstract.php 24593 2012-01-05 20:35:02Z matthew $
+ * @version    $Id: HelperAbstract.php 24879 2012-06-06 13:09:21Z adamlundrigan $
  */
 
 /**
@@ -669,12 +669,15 @@ abstract class Zend_View_Helper_Navigation_HelperAbstract
         }
 
         // get attribs for anchor element
-        $attribs = array(
-            'id'     => $page->getId(),
-            'title'  => $title,
-            'class'  => $page->getClass(),
-            'href'   => $page->getHref(),
-            'target' => $page->getTarget()
+        $attribs = array_merge(
+            array(
+                'id'     => $page->getId(),
+                'title'  => $title,
+                'class'  => $page->getClass(),
+                'href'   => $page->getHref(),
+                'target' => $page->getTarget()
+            ),
+            $page->getCustomHtmlAttribs()
         );
 
         return '<a' . $this->_htmlAttribs($attribs) . '>'
