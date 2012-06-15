@@ -17,7 +17,7 @@
  * @subpackage Table
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 24831 2012-05-30 12:52:25Z rob $
+ * @version    $Id: Abstract.php 24958 2012-06-15 13:44:04Z adamlundrigan $
  */
 
 /**
@@ -886,7 +886,7 @@ abstract class Zend_Db_Table_Abstract
             // then throw an exception.
             if (empty($this->_primary)) {
                 require_once 'Zend/Db/Table/Exception.php';
-                throw new Zend_Db_Table_Exception('A table must have a primary key, but none was found');
+                throw new Zend_Db_Table_Exception("A table must have a primary key, but none was found for table '{$this->_name}'");
             }
         } else if (!is_array($this->_primary)) {
             $this->_primary = array(1 => $this->_primary);
@@ -1181,6 +1181,22 @@ abstract class Zend_Db_Table_Abstract
      */
     public function delete($where)
     {
+        $depTables = $this->getDependentTables();
+        if (!empty($depTables)) {
+            $resultSet = $this->fetchAll($where);
+            if (count($resultSet) > 0 ) {
+                foreach ($resultSet as $row) {
+                    /**
+                     * Execute cascading deletes against dependent tables
+                     */
+                    foreach ($depTables as $tableClass) {
+                        $t = self::getTableFromString($tableClass, $this);
+                        $t->_cascadeDelete($tableClass, $row->getPrimaryKey());
+                    }
+                }
+            }
+        }
+
         $tableSpec = ($this->_schema ? $this->_schema . '.' : '') . $this->_name;
         return $this->_db->delete($tableSpec, $where);
     }
