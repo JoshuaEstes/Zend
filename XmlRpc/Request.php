@@ -43,7 +43,7 @@ require_once 'Zend/XmlRpc/Fault.php';
  * @package  Zend_XmlRpc
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version $Id: Request.php 24970 2012-06-18 16:19:14Z matthew $
+ * @version $Id: Request.php 24975 2012-06-19 15:52:52Z matthew $
  */
 class Zend_XmlRpc_Request
 {
@@ -307,6 +307,7 @@ class Zend_XmlRpc_Request
         $loadEntities = libxml_disable_entity_loader(true);
         try {
             $xml = new SimpleXMLElement($request);
+            libxml_disable_entity_loader($loadEntities);
         } catch (Exception $e) {
             // Not valid XML
             $this->_fault = new Zend_XmlRpc_Fault(631);
@@ -320,7 +321,6 @@ class Zend_XmlRpc_Request
             // Missing method name
             $this->_fault = new Zend_XmlRpc_Fault(632);
             $this->_fault->setEncoding($this->getEncoding());
-            libxml_disable_entity_loader($loadEntities);
             return false;
         }
 
@@ -334,7 +334,6 @@ class Zend_XmlRpc_Request
                 if (!isset($param->value)) {
                     $this->_fault = new Zend_XmlRpc_Fault(633);
                     $this->_fault->setEncoding($this->getEncoding());
-                    libxml_disable_entity_loader($loadEntities);
                     return false;
                 }
 
@@ -345,7 +344,6 @@ class Zend_XmlRpc_Request
                 } catch (Exception $e) {
                     $this->_fault = new Zend_XmlRpc_Fault(636);
                     $this->_fault->setEncoding($this->getEncoding());
-                    libxml_disable_entity_loader($loadEntities);
                     return false;
                 }
             }
@@ -354,7 +352,6 @@ class Zend_XmlRpc_Request
             $this->_params = $argv;
         }
 
-        libxml_disable_entity_loader($loadEntities);
         $this->_xml = $request;
 
         return true;
